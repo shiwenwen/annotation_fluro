@@ -1,9 +1,14 @@
+import 'package:annotation_fluro/route.dart';
 import 'package:flutter/material.dart';
+import 'package:fluro/fluro.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+Widget handler(BuildContext _, Map<String, List<String>> para) => MyApp();
+
+@FRoute(routePath: '/app', handlerFunc: handler)
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
