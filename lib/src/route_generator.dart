@@ -6,9 +6,9 @@ import 'package:analyzer/src/dart/constant/value.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:build/build.dart';
 
-import 'route.dart';
+import 'annotation.dart';
 
-class RouteGenerator extends GeneratorForAnnotation<FRoute> {
+class RouteGenerator extends GeneratorForAnnotation<Annotation> {
   @override
   generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) {
