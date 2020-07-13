@@ -1,0 +1,3 @@
+class Annotation {
+  const Annotation();
+}
