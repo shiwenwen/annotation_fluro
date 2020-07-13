@@ -1,8 +1,8 @@
 name: annotation_fluro
 description: A Fluro router config mapping solution based on source_gen through annotation
 version: 0.0.1
-author:
-homepage:
+author: shiwenwendevelop@163.com
+homepage: https://github.com/shiwenwen/annotation_fluro
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
