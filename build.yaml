@@ -1,0 +1,14 @@
+targets:
+  $default:
+    builders:
+      annotation_fluro|route_builder:
+        enabled: true
+        generate_for:
+          exclude: ['**.internal.dart']
+builders:
+  mark_builder:
+    import: 'package:annotation_fluro/builder.dart'
+    builder_factories: ['routeBuilder']
+    build_extensions: { '.dart': ['.internal_invalid.dart'] }
+    auto_apply: root_package
+    build_to: source
