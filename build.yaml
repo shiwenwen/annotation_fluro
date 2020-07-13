@@ -6,7 +6,7 @@ targets:
         generate_for:
           exclude: ['**.internal.dart']
 builders:
-  mark_builder:
+  route_builder:
     import: 'package:annotation_fluro/builder.dart'
     builder_factories: ['routeBuilder']
     build_extensions: { '.dart': ['.internal_invalid.dart'] }
