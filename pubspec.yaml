@@ -10,8 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  source_gen: ^0.9.6
-  fluro: ^1.6.3
+  build: any
+  source_gen: any
+  fluro: any
+
 
 dev_dependencies:
   flutter_test:
