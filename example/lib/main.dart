@@ -6,7 +6,7 @@ void main() {
   runApp(MyApp());
 }
 
-Widget handler(BuildContext _, Map<String, List<String>> para) => MyApp();
+Widget handler(BuildContext _, Map<String, List<String>> params) => MyApp();
 
 @FRoute(routePath: '/app', handlerFunc: handler)
 class MyApp extends StatelessWidget {
