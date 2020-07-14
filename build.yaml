@@ -4,11 +4,23 @@ targets:
       annotation_fluro|route_builder:
         enabled: true
         generate_for:
-          exclude: ['**.internal.dart']
+          exclude: ['**.f_route.g.dart']
+      annotation_fluro|route_write_builder:
+        enabled: true
+        options: { 'write': true }
+        generate_for:
+          exclude: ['**.internal_invalid.dart']
 builders:
+  route_write_builder:
+    import: 'package:annotation_fluro/builder.dart'
+    builder_factories: ['routeWriteBuilder']
+    build_extensions: { '.dart': ['.f_route.g.dart'] }
+    auto_apply: root_package
+    build_to: source
   route_builder:
     import: 'package:annotation_fluro/builder.dart'
     builder_factories: ['routeBuilder']
     build_extensions: { '.dart': ['.internal_invalid.dart'] }
     auto_apply: root_package
+    runs_before: ['annotation_fluro|route_write_builder']
     build_to: source
