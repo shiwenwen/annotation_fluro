@@ -270,6 +270,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.6+3"
+  mustache4dart:
+    dependency: "direct main"
+    description:
+      name: mustache4dart
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0-dev.0.0"
   node_interop:
     dependency: transitive
     description:

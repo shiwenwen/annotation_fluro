@@ -14,6 +14,7 @@ dependencies:
   source_gen: any
   fluro: any
   build_config: any
+  mustache4dart: any
 
 
 dev_dependencies:
