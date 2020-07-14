@@ -8,3 +8,7 @@ import 'src/route_generator.dart';
 
 Builder routeBuilder(BuilderOptions options) => LibraryBuilder(RouteGenerator(),
     generatedExtension: '.internal_invalid.dart');
+
+Builder routeWriteBuilder(BuilderOptions options) =>
+    LibraryBuilder(RouteWriterGenerator(),
+        generatedExtension: '.f_route.g.dart');
