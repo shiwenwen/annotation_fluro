@@ -51,7 +51,7 @@ packages:
     source: hosted
     version: "1.3.0"
   build_config:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: build_config
       url: "https://pub.flutter-io.cn"

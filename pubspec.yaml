@@ -13,6 +13,7 @@ dependencies:
   build: any
   source_gen: any
   fluro: any
+  build_config: any
 
 
 dev_dependencies:
