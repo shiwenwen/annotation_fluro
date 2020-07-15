@@ -5,9 +5,10 @@ import 'package:annotation_fluro/route.dart';
 
 import 'router/routers.dart';
 
-@FRoute(routePath: '/c')
+@FRoute('/c', constructor: 'PageC.from')
 class PageC extends StatelessWidget {
   final String from;
+  PageC() : this.from = '';
   PageC.from({this.from});
 
   @override

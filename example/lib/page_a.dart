@@ -5,7 +5,7 @@ import 'package:annotation_fluro/route.dart';
 
 import 'router/routers.dart';
 
-@FRoute(routePath: '/a')
+@FRoute('/a')
 class PageA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

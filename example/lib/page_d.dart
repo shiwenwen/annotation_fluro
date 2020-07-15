@@ -7,7 +7,7 @@ Widget pageDHandler(BuildContext _, Map<String, List<String>> params) => PageD(
       from: params['from']?.first,
     );
 
-@FRoute(routePath: '/d', handlerFunc: pageDHandler)
+@FRoute('/d', handlerFunc: pageDHandler)
 class PageD extends StatelessWidget {
   final String from;
 

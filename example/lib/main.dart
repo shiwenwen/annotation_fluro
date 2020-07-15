@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-@FRoute(routePath: '/home')
+@FRoute('/home')
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

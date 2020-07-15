@@ -5,7 +5,7 @@ import 'package:annotation_fluro/route.dart';
 
 import 'router/routers.dart';
 
-@FRoute(routePath: '/b')
+@FRoute('/b')
 class PageB extends StatelessWidget {
   final String content;
   final int number;
