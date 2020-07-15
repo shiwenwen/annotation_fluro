@@ -12,6 +12,7 @@ class Collector {
   bool hasWrite = false;
   List<String> imports = [];
   List<RouteEntity> routers = [];
+
   collect(Element element, ConstantReader annotation, BuildStep buildStep) {
     final String routePath = annotation.peek('routePath').stringValue;
     final int handlerType = annotation.peek('handlerType')?.enumRawValue;
@@ -35,7 +36,7 @@ class Collector {
             ? 'null'
             : TransitionType.values[transitionType].toString(),
         handlerFunc,
-        element.displayName));
+        element as ClassElement));
   }
 }
 
@@ -43,15 +44,54 @@ class RouteEntity {
   final String routePath;
   final String handlerType;
   final String transitionType;
-  final String className;
+  final ClassElement routeClass;
   final ExecutableElement handlerFunc;
+
   RouteEntity(this.routePath, this.handlerType, this.transitionType,
-      this.handlerFunc, this.className);
+      this.handlerFunc, this.routeClass);
+
   String get generateCode {
     String handler;
     if (null == handlerFunc) {
-      handler =
-          "Handler(type: $handlerType, handlerFunc: (_, __) => $className())";
+      final firstConstructors = routeClass.constructors.first;
+      final parameters = firstConstructors.parameters;
+      if (parameters.isEmpty) {
+        handler =
+            "Handler(type: $handlerType, handlerFunc: (_, __) => ${firstConstructors.fullName}())";
+      } else {
+        final List<String> parametersData = parameters.map((param) {
+          print(param);
+          String defaultValue = param.defaultValueCode;
+          String valueStr =
+              "params['${param.name}']?.first";
+          if (null != defaultValue) {
+            print(defaultValue);
+            valueStr = "$valueStr ?? $defaultValue.toString()";
+          }
+          switch (param.type.getDisplayString()) {
+            case 'int':
+            case 'double':
+              {
+                valueStr = '${param.type.getDisplayString()}.tryParse($valueStr)';
+              }
+              break;
+            case 'bool':
+              {
+                valueStr = "($valueStr) == 'true'";
+              }
+              break;
+            default:
+              break;
+          }
+          if (param.isNamed) {
+            return "${param.name}: $valueStr";
+          } else {
+            return valueStr;
+          }
+        }).toList();
+        handler =
+            "Handler(type: $handlerType, handlerFunc: (_, params) => ${firstConstructors.fullName}(${parametersData.join(',')}))";
+      }
     } else {
       handler = "Handler(type: $handlerType, handlerFunc: ${handlerFunc.name})";
     }
