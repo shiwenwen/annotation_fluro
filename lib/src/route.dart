@@ -11,9 +11,8 @@ class FRoute extends BaseFRoute {
   final TransitionType transitionType;
   final String constructor;
 
-  const FRoute(
-      {this.routePath,
-      this.handlerType = HandlerType.route,
+  const FRoute(this.routePath,
+      {this.handlerType = HandlerType.route,
       this.handlerFunc,
       this.transitionType,
       this.constructor});
