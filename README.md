@@ -1,6 +1,7 @@
 # annotation_fluro
 
 A Fluro router config mapping solution based on source_gen through annotation
+一个以注解方式实现的fluro路由映射解决方案。
 
 ## Getting Started
 
