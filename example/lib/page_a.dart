@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:annotation_fluro/route.dart';
 
+import 'router/routers.dart';
+
 @FRoute(routePath: '/a')
 class PageA extends StatelessWidget {
   @override
@@ -14,7 +16,9 @@ class PageA extends StatelessWidget {
       body: Center(
         child: RaisedButton(
           child: Text('To PageB'),
-          onPressed: () {},
+          onPressed: () {
+            Routers.router.navigateTo(context, '/b?content=hello&number=100');
+          },
         ),
       ),
     );

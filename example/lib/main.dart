@@ -1,15 +1,12 @@
 import 'package:annotation_fluro/route.dart';
 import 'package:flutter/material.dart';
-import 'package:fluro/fluro.dart';
+import 'router/routers.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp() {
-    Router router = Router();
-  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,6 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      onGenerateRoute: Routers.router.generator,
       home: MyHomePage(),
     );
   }
@@ -34,7 +32,9 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: RaisedButton(
           child: Text('To PageA'),
-          onPressed: () {},
+          onPressed: () {
+            Routers.router.navigateTo(context, '/a');
+          },
         ),
       ),
     );
