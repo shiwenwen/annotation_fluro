@@ -1,17 +1,14 @@
-/// page_b
+/// page_c
 /// Created by smindu-sww on 2020/7/14
 import 'package:flutter/material.dart';
 import 'package:annotation_fluro/route.dart';
 
-Widget pageCHandler(BuildContext _, Map<String, List<String>> params) => PageC(
-      from: params['from']?.first,
-    );
+import 'router/routers.dart';
 
-@FRoute(routePath: '/c', handlerFunc: pageCHandler)
+@FRoute(routePath: '/c')
 class PageC extends StatelessWidget {
   final String from;
-
-  PageC({this.from});
+  PageC.from({this.from});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,18 @@ class PageC extends StatelessWidget {
         title: Text('PageC'),
       ),
       body: Center(
-        child: Text('From: $from'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('From: $from'),
+            RaisedButton(
+              child: Text('To PageC'),
+              onPressed: () {
+                Routers.router.navigateTo(context, '/d?from=PageC');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

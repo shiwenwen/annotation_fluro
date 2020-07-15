@@ -11,6 +11,7 @@ class PageB extends StatelessWidget {
   final int number;
 
   PageB(int number, {this.content}) : this.number = number;
+  PageB.cc({this.content}) : this.number = 10;
 
   @override
   Widget build(BuildContext context) {
