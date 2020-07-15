@@ -1,6 +1,6 @@
 name: annotation_fluro
 description: 一个强大的以注解方式实现的fluro路由映射解决方案。A powerful Fluro router config mapping solution based on source_gen through annotation.
-version: 0.0.1
+version: 1.0.0
 author: shiwenwen <shiwenwendevelop@163.com>
 homepage: https://github.com/shiwenwen/annotation_fluro
 
