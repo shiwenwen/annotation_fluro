@@ -17,6 +17,7 @@ class Collector {
     final String routePath = annotation.peek('routePath').stringValue;
     final int handlerType = annotation.peek('handlerType')?.enumRawValue;
     final int transitionType = annotation.peek('transitionType')?.enumRawValue;
+    final String constructor = annotation.peek('constructor')?.stringValue;
     final ExecutableElement handlerFunc =
         annotation.peek('handlerFunc')?.objectValue?.toFunctionValue();
 
@@ -36,7 +37,8 @@ class Collector {
             ? 'null'
             : TransitionType.values[transitionType].toString(),
         handlerFunc,
-        element as ClassElement));
+        element as ClassElement,
+        constructor));
   }
 }
 
@@ -46,33 +48,34 @@ class RouteEntity {
   final String transitionType;
   final ClassElement routeClass;
   final ExecutableElement handlerFunc;
+  final String constructor;
 
   RouteEntity(this.routePath, this.handlerType, this.transitionType,
-      this.handlerFunc, this.routeClass);
+      this.handlerFunc, this.routeClass, this.constructor);
 
   String get generateCode {
     String handler;
     if (null == handlerFunc) {
-      final firstConstructors = routeClass.constructors.first;
-      final parameters = firstConstructors.parameters;
+      ConstructorElement constructorElement = routeClass.constructors
+          .firstWhere((element) => element.fullName == constructor,
+              orElse: () => routeClass.constructors.first);
+      final parameters = constructorElement.parameters;
       if (parameters.isEmpty) {
         handler =
-            "Handler(type: $handlerType, handlerFunc: (_, __) => ${firstConstructors.fullName}())";
+            "Handler(type: $handlerType, handlerFunc: (_, __) => ${constructorElement.fullName}())";
       } else {
         final List<String> parametersData = parameters.map((param) {
-          print(param);
           String defaultValue = param.defaultValueCode;
-          String valueStr =
-              "params['${param.name}']?.first";
+          String valueStr = "params['${param.name}']?.first";
           if (null != defaultValue) {
-            print(defaultValue);
             valueStr = "$valueStr ?? $defaultValue.toString()";
           }
           switch (param.type.getDisplayString()) {
             case 'int':
             case 'double':
               {
-                valueStr = '${param.type.getDisplayString()}.tryParse($valueStr)';
+                valueStr =
+                    '${param.type.getDisplayString()}.tryParse($valueStr)';
               }
               break;
             case 'bool':
@@ -90,7 +93,7 @@ class RouteEntity {
           }
         }).toList();
         handler =
-            "Handler(type: $handlerType, handlerFunc: (_, params) => ${firstConstructors.fullName}(${parametersData.join(',')}))";
+            "Handler(type: $handlerType, handlerFunc: (_, params) => ${constructorElement.fullName}(${parametersData.join(',')}))";
       }
     } else {
       handler = "Handler(type: $handlerType, handlerFunc: ${handlerFunc.name})";
